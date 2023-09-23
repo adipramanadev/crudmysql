@@ -1,3 +1,5 @@
+import 'package:crudmysql/controller/databaseHelper.dart';
+import 'package:crudmysql/views/dashboard.dart';
 import 'package:flutter/material.dart';
 
 class AddData extends StatefulWidget {
@@ -8,6 +10,11 @@ class AddData extends StatefulWidget {
 }
 
 class _AddDataState extends State<AddData> {
+  //panggil databaseHelper
+  DatabaseHelper dbHelper = DatabaseHelper();
+  //deklarasi controller pada textfield
+  TextEditingController txtNamaProduk = TextEditingController();
+  TextEditingController txtPrice = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +36,8 @@ class _AddDataState extends State<AddData> {
             Container(
               height: 50.0,
               child: TextField(
-                keyboardType: TextInputType.none,
+                controller: txtNamaProduk,
+                keyboardType: TextInputType.text,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
@@ -39,7 +47,44 @@ class _AddDataState extends State<AddData> {
                   icon: const Icon(Icons.apps),
                 ),
               ),
-            )
+            ),
+            SizedBox(
+              height: 20.0,
+            ),
+            Container(
+              height: 50.0,
+              child: TextField(
+                controller: txtPrice,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  labelText: 'Price',
+                  hintText: 'Price',
+                  icon: const Icon(Icons.apps),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 40.0,
+            ),
+            ElevatedButton(
+              onPressed: () {
+                //saveData
+                dbHelper.addData(
+                  txtNamaProduk.text.trim(),
+                  txtPrice.text.trim(),
+                );
+                //redirect ke halaman dashboard
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => Dashboard(),
+                  ),
+                );
+              },
+              child: const Text('Save'),
+            ),
           ],
         ),
       ),
