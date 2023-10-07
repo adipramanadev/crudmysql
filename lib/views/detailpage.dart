@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 
 import '../controller/databaseHelper.dart';
 import 'dashboard.dart';
+import 'editpage.dart';
 
 class Detail extends StatefulWidget {
-  List? list;
+  List list;
   int index;
-  Detail({this.list, required this.index});
+  Detail({required this.list, required this.index});
 
   @override
   State<Detail> createState() => _DetailState();
@@ -70,7 +71,27 @@ class _DetailState extends State<Detail> {
                     },
                     child: Text('Delete'),
                   ),
-                )
+                ),
+                SizedBox(
+                  width: 30,
+                ),
+                Container(
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.greenAccent,
+                    ),
+                    onPressed: () {
+                      //editPage
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              EditPage(list: widget.list, index: widget.index),
+                        ),
+                      );
+                    },
+                    child: Text('Update'),
+                  ),
+                ),
               ],
             )
           ],
