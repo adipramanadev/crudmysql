@@ -22,4 +22,13 @@ class DatabaseHelper {
       print('response body : ${response.body}');
     });
   }
+
+  //delete data
+  void deleteData(int id) async {
+    String url = 'http://192.168.100.57:8000/api/destroy-crud/$id';
+    http.delete(Uri.parse(url)).then((response) {
+      print('response status : ${response.statusCode}');
+      print('response body : ${response.body}');
+    });
+  }
 }

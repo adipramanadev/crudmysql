@@ -2,6 +2,7 @@ import 'package:crudmysql/controller/databaseHelper.dart';
 import 'package:flutter/material.dart';
 
 import 'addPage.dart';
+import 'detailpage.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -18,12 +19,7 @@ class _DashboardState extends State<Dashboard> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Dashboard"),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.add),
-          ),
-        ],
+        automaticallyImplyLeading: false,
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -62,8 +58,12 @@ class ItemList extends StatelessWidget {
           padding: const EdgeInsets.all(10.0),
           child: GestureDetector(
             onTap: () {
-              // Navigator.push(
-              // context, MaterialPageRoute(builder: ((context) => Detail())));
+              // print('klik');
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => Detail(list: list, index: index),
+                ),
+              );
             },
             child: Card(
               child: ListTile(
